@@ -7,7 +7,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { Avatar } from '@material-ui/core';
 import {StoreContext} from '../Context/Context'
 import { useHistory } from 'react-router-dom';
-import Modal from './Modal'
 import EditIcon from '@material-ui/icons/Edit';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
@@ -55,11 +54,6 @@ export default function CustomizedMenus() {
     setAnchorEl(null);
   };
 
-  const handleCloseModal = () => {
-    setOpen(false);
-  };
-  
-
   const context = useContext(StoreContext);
 
   const history = useHistory();
@@ -82,6 +76,7 @@ export default function CustomizedMenus() {
         color="primary"
         onClick={handleClick}
         >
+          {context.user.name.charAt(0)}
       </Avatar>
       <StyledMenu
         id="customized-menu"
@@ -91,25 +86,14 @@ export default function CustomizedMenus() {
         onClose={handleClose}
       >
         <StyledMenuItem onClick={() => {handleClose(); setOpen(true)}}>
-          <ListItemIcon>
-            <EditIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Edit" />
-        </StyledMenuItem>
-        <StyledMenuItem onClick={handleHistory}>
-          <ListItemIcon>
-            <ExitToAppIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Logout" />
+          <StyledMenuItem onClick={handleHistory}>
+            <ListItemIcon>
+              <ExitToAppIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary="Logout" />
+          </StyledMenuItem>
         </StyledMenuItem>
       </StyledMenu>
-      <Modal
-        open={open}
-        user={context.user}
-        updateUser={updateUser}
-        handleClose={handleCloseModal}
-        showDelete = {false}
-      ></Modal>
     </div>
   );
 }

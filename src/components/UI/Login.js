@@ -43,7 +43,7 @@ useEffect(() => {
   //eslint-disable-next-line
 }, [])
   const handleHistory = () => {
-    context.getUser(user, password).then(()=> {history.push('/users')}).catch(()=> setMsg('user or password incorrect!'))
+    context.loginHandler(user, password).then(()=> {history.push('/users')}).catch(()=> setMsg('user or password incorrect!'))
   }
   const createAccount = () => {
     history.push('/CreateAccount')

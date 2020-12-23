@@ -5,7 +5,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Avatarmenu from './Avatarmenu';
 import Button from '@material-ui/core/Button';
-import Adduser from './Adduser';
 import {StoreContext} from '../Context/Context'
 
 
@@ -43,11 +42,7 @@ export default function ButtonAppBar() {
       <AppBar position='fixed' color='primary'>
         <Toolbar>
           <Typography variant='h3' className={classes.title}>User Test App</Typography>
-          <Adduser
-            open={open}
-            handleClose={handleClose}
-          ></Adduser>
-          {context.user.isAdmin && <Button variant="contained" onClick={handleClickOpen} style={{marginRight:20}} disableRipple disableElevation color='primary'>Add User</Button>}
+          {context.user.name}
           <Avatarmenu></Avatarmenu>
         </Toolbar>
       </AppBar>

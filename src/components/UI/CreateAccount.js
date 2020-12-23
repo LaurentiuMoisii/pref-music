@@ -1,10 +1,12 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import create from '../../assets/create.svg'
 import { makeStyles } from '@material-ui/styles'
 import { TextField } from '@material-ui/core'
+import { StoreContext } from '../Context/Context'
+import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   create: {
@@ -23,18 +25,23 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CreateAccount() {
 
+  const history = useHistory();
+  const context = useContext(StoreContext);
   const classes = useStyles();
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('')
-
-
-
   const changeUser = (event) => {
     setUser(event.target.value)
   }
 
   const changePassword = (event) => {
     setPassword(event.target.value)
+  }
+
+  const createUserHandler = () => {
+    context.addUsersHandler(user, password).then(()=>{
+      history.push('/')
+    })
   }
 
     return (
@@ -72,6 +79,7 @@ export default function CreateAccount() {
                   className={classes.createAccount} 
                   variant='contained'
                   disabled={user.length === 0 || password.length === 0}
+                  onClick={createUserHandler}
                   >
                   Create Account
                 </Button>
